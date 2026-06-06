@@ -71,11 +71,11 @@ let state = {
 };
 
 // --- Persistence ---
-function saveState() {
+const saveState = () => {
   localStorage.setItem('pieTrackerState', JSON.stringify(state));
 }
 
-function loadState() {
+const loadState = () => {
   const raw = localStorage.getItem('pieTrackerState');
   if (raw) {
     try {
@@ -139,8 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('cart-list').addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-action="remove-cart"]');
-    if (btn) removeCartItem(Number(btn.dataset.idx));
+    const incBtn = e.target.closest('[data-action="inc-qty"]');
+      if(incBn) updateCartQty(Number(incBtn.dataset.idx), 1);
+    const decBtn = e.target.closest('[data-action="dec-qty"]');
+      if(decBtn) updateCartQty(Number(decBtn.dataset.idx), -1)
+
+
+    
   });
 
   document.getElementById('orders-container').addEventListener('click', (e) => {
@@ -177,16 +182,23 @@ function renderPremadeMenu() {
   `).join('');
 }
 
-function addPremadeToCart(id) {
-  const pie = PREMADE_PIES.find(p => p.id === id);
-  if (!pie) return;
-  state.cart.push({ type: 'premade', name: pie.name, price: pie.price });
+const addToCart = (item) => {
+  const idx = state.cart.findIndex(c => c.name === item.name)
+  if(idx > -1){
+    state.cart[idx].qty += 1;
+  } else{
+    state.cart.push({ ...item, qty: 1});
+  }
   saveState();
   renderCart();
 }
+const addPremadeToCart = (id) => {
+  const preMadePie = PREMADE_PIES.find(p => p.id === id);
+  if(preMadePie) addToCart({type: 'premade', name: preMadePie.name, price: preMadePie.price});
+}
 
 // --- BYOP Form ---
-function renderBYOPForm() {
+const renderBYOPForm = () => {
   const sizeSelect = document.getElementById('byop-size');
   sizeSelect.innerHTML = BYOP_CONFIG.sizes.map((s, i) =>
     `<option value="${s.id}" ${i === 2 ? 'selected' : ''}>${s.name} — ${fmtPrice(s.basePrice)}</option>`
@@ -232,7 +244,7 @@ function renderBYOPForm() {
   document.getElementById('byop-toppings').innerHTML = renderGroup('Meat Toppings', meats) + renderGroup('Vegetable Toppings', veggies);
 }
 
-function getBYOPPrice() {
+const getBYOPPrice = () => {
   const sizeId = document.getElementById('byop-size').value;
   const size = BYOP_CONFIG.sizes.find(s => s.id === sizeId) || BYOP_CONFIG.sizes[0];
 
@@ -261,7 +273,7 @@ function getBYOPPrice() {
   return { total, size, crust, sauce, cheeses, toppings, cheeseExtra, toppingsExtra };
 }
 
-function updateBYOPPrice() {
+const updateBYOPPrice = () => {
   const { total, cheeseExtra, toppingsExtra } = getBYOPPrice();
   document.getElementById('byop-price').textContent = fmtPrice(total);
 
@@ -303,12 +315,12 @@ function updateBYOPPrice() {
   });
 }
 
-function addBYOPToCart() {
+const addBYOPToCart = () => {
   const { total, size, crust, sauce, cheeses, toppings } = getBYOPPrice();
   const cheeseStr = cheeses.length ? cheeses.map(c => c.name).join('/') : 'No Cheese';
   const toppingStr = toppings.length ? toppings.map(t => t.name).join(', ') : 'No Toppings';
   const name = `BYOP ${size.name} — ${crust.name}, ${sauce.name}, ${cheeseStr} + ${toppingStr}`;
-  state.cart.push({ type: 'byop', name, price: total });
+  addToCart({ type: 'byop', name, price: total, qty: 1 });
   saveState();
   renderCart();
   document.querySelectorAll('#byop-cheeses input, #byop-toppings input').forEach(cb => cb.checked = false);
@@ -316,7 +328,7 @@ function addBYOPToCart() {
 }
 
 // --- Cart ---
-function renderCart() {
+const renderCart = () => {
   const section = document.getElementById('cart-section');
   const list = document.getElementById('cart-list');
   const totalEl = document.getElementById('cart-total');
@@ -329,7 +341,10 @@ function renderCart() {
   }
 
   section.classList.remove('d-none');
-  countEl.textContent = `${state.cart.length} item${state.cart.length !== 1 ? 's' : ''}`;
+  const totalItems = state.cart.reduce((s, c)=> s + c.qty, 0);
+  countEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+
+ 
 
   list.innerHTML = state.cart.map((item, idx) => `
     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -338,23 +353,33 @@ function renderCart() {
         <small class="text-muted text-capitalize">${item.type}</small>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <span class="fw-bold">${fmtPrice(item.price)}</span>
-        <button class="btn btn-sm btn-outline-danger" data-action="remove-cart" data-idx="${idx}">Remove</button>
+        <span class="fw-bold">${fmtPrice(item.price * item.qty)}</span>
+        <button class="btn btn-sm btn-outline-secondary" data-action="dec-qty" data-idx="${idx}">−</button>
+        <span class="fw-bold">${item.qty}</span>
+        <button class="btn btn-sm btn-outline-secondary" data-action:"inc-qty" data-idx="${idx}">+</button>
       </div>
     </li>
   `).join('');
-
-  const total = state.cart.reduce((sum, item) => sum + item.price, 0);
+  const total = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   totalEl.textContent = fmtPrice(total);
 }
 
-function removeCartItem(idx) {
+const updateCartQty = (idx, delta) => {
+  const item = state.cart[idx];
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) state.cart.splice(idx, 1);
+  saveState();
+  renderCart();
+}
+
+  const removeCartItem = (idx) => {
   state.cart.splice(idx, 1);
   saveState();
   renderCart();
 }
 
-function clearCart() {
+const clearCart = () => {
   state.cart = [];
   saveState();
   renderCart();
@@ -376,7 +401,7 @@ const WINES = [
   { id: 'prosecco', name: 'Prosecco', price: 30 }
 ];
 
-function renderSides() {
+const renderSides = () => {
   const container = document.getElementById('sides-list');
   container.innerHTML = SIDES.map(side => `
     <div class="list-group-item d-flex justify-content-between align-items-center py-3">
@@ -389,15 +414,15 @@ function renderSides() {
   `).join('');
 }
 
-function addSideToCart(id) {
+const addSideToCart = (id) => {
   const side = SIDES.find(s => s.id === id);
   if (!side) return;
-  state.cart.push({ type: 'side', name: side.name, price: side.price });
+  addToCart({ type: 'side', name: side.name, price: side.price });
   saveState();
   renderCart();
 }
 
-function renderWine() {
+const renderWine = () => {
   const container = document.getElementById('wine-body');
   if (!state.ageVerified) {
     container.innerHTML = `
@@ -426,7 +451,7 @@ function renderWine() {
   `;
 }
 
-function showAgeVerifyForm() {
+const showAgeVerifyForm = () => {
   const container = document.getElementById('wine-body');
   container.innerHTML = `
     <form id="age-form" class="text-center py-3">
@@ -454,7 +479,7 @@ function showAgeVerifyForm() {
   `;
 }
 
-function confirmAge() {
+const confirmAge = () => {
   const month = Number(document.getElementById('age-month')?.value);
   const day = Number(document.getElementById('age-day')?.value);
   const year = Number(document.getElementById('age-year')?.value);
@@ -480,17 +505,18 @@ function confirmAge() {
   }
 }
 
-function addWineToCart(id) {
+
+const addWineToCart = (id) => {
   const wine = WINES.find(w => w.id === id);
   if (!wine) return;
-  state.cart.push({ type: 'wine', name: wine.name, price: wine.price });
+  addToCart({ type: 'wine', name: wine.name, price: wine.price, qty: 1 });
   saveState();
   renderCart();
 }
 
 // --- Orders ---
-function placeOrder() {
-  if (state.cart.length === 0) return;
+const placeOrder = () => {
+  if (tate.cart.length === 0) return;
 
   const order = {
     id: state.nextOrderId++,
@@ -507,7 +533,7 @@ function placeOrder() {
   renderOrders();
 }
 
-function renderOrders() {
+const renderOrders = () => {
   const container = document.getElementById('orders-container');
 
   if (state.orders.length === 0) {
@@ -556,7 +582,7 @@ function renderOrders() {
   }).join('');
 }
 
-function advanceOrder(id) {
+const advanceOrder = (id) => {
   const order = state.orders.find(o => o.id === id);
   if (!order) return;
   if (order.statusIdx < STATUS_STAGES.length - 1) {
@@ -566,7 +592,7 @@ function advanceOrder(id) {
   }
 }
 
-function completeOrder(id) {
+const completeOrder = (id) => {
   const idx = state.orders.findIndex(o => o.id === id);
   if (idx === -1) return;
   const order = state.orders.splice(idx, 1)[0];
@@ -577,7 +603,7 @@ function completeOrder(id) {
 }
 
 // --- History ---
-function renderHistory() {
+const renderHistory = () => {
   const list = document.getElementById('history-list');
 
   if (state.history.length === 0) {
