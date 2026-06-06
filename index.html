@@ -12,7 +12,7 @@
 </head> 
 <body>  
   <div class="container">
-   <div class="mt-5 d-flex-row">
+   <div class="mt-5">
     <h1 class="display-2 text-center mt-5">
       <img width="100px" height="100px" src="./assets/images/Topmenulogo.png" />
         A National Favorite the<span class="badge text-bg-primary">Brickoven Cafe</span>  
@@ -22,39 +22,39 @@
       <div class="card mx-auto gap-3" id="favPies" style="width: 25rem">
         <h2 class="card-header display-flex">Our Favorite Pizza Pie's</h2>
         <ul class="card-body list-group list-group-flush ">
-           <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+           <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center pie-List">
               <input class="form-check-input me-2" type="checkbox" id="pizza-traditional"/>
               <label for="pizza-traditional">Traditional Pepperoni</label>             
             <div>
-                <p class="fw-bold text-end" id="piePrice">$13</p>
+              <p class="fw-bold text-end" id="pizza-traditional-price">$13</p>
             </div>
            </li>
-          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center pie-List">
               <input class="form-check-input me-2" type="checkbox" id="cheese-only"/>
               <label for="cheese-only">All cheese</label>
             <div class="d-flex flex-column align-items-start">
-               <p class="mb-0 fw-bold" id="piePrice">$10</p>
+               <p class="mb-0 fw-bold" id="cheese-only-price">$10</p>
             </div>             
           </li>
-          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center pie-List">
               <input class="form-check-input me-2" type="checkbox" id="meatNcheese"/>
               <label for="meatNcheese">3-Meat & Cheese</label>
             <div class="d-flex flex-column align-items-start">
-              <p class="fw-bold mb-0" id="piePrice">$15</p>
+              <p class="fw-bold mb-0" id="meatNcheese-price">$15</p>
             </div>
           </li>
-          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center pie-List">
             <input class="form-check-input me-2" type="checkbox" id="supreme">
             <label for="supreme">Pesto Drizzle Supreme</label>
               <div>
-                  <p class="fw-bold ext-end" id="piePrice">$16</p>
+                  <p class="fw-bold text-end" id="supreme-price">$16</p>
               </div>
           </li>
-          <li class="list-group-item card-body fs-4 mr-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+          <li class="list-group-item card-body fs-4 mr-4 fw-italic d-flex justify-content-between align-items-center pie-List">
             <input class="form-check-input me-2" type="checkbox" id="vegveng">
             <label for="vegveng">Vegitable Vengence</label><img width="25px" height="25px" src="./assets/images/vegan.svg">
                <div>
-                 <p class="fw-bold text-end mb-0" id="piePrice">$14</p>
+                 <p class="fw-bold text-end mb-0" id="vegveng-price">$14</p>
               </div>
           </li>
         </ul>
@@ -70,80 +70,84 @@
           <h2>Build Your Own Pie</h2>
         </div>
         <ul class="list-group list-group-flush">
+                 <!--Pizza radius options-->
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary" type="button" id="size-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <h3>Pie Size</h3><span class="float-end">▼</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="byopDropDown">
+            <ul class="dropdown-menu" aria-labelledby="size-dropdown">
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="smCrust">
-                <label for="smCrust">10"</label>   
+                <input class="form-check-input me-2" type="radio" name="pie-size" id="smCrust">
+                <label for="smCrust">10"</label>  
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox"  id="mdCrust">
+                <input class="form-check-input me-2" type="radio" name="pie-size" id="mdCrust">
                 <label for="mdCrust">12"</label>
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="regCrust">
+                <input class="form-check-input me-2" type="radio" name="pie-size" id="regCrust">
                 <label for="regCrust">14"</label>
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="lgCrust">
+                <input class="form-check-input me-2" type="radio" name="pie-size" id="lgCrust">
                 <label for="lgCrust">16"</label>
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="xlCrust">
+                <input class="form-check-input me-2" type="radio" name="pie-size" id="xlCrust">
                 <label for="xlCrust">18"</label>
               </li>    
             </ul>
           </li>
+             <!--Crust choices-->
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary" type="button" id="crust-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <h3>Crust</h3><span class="float-end">▼</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul class="dropdown-menu" aria-labelledby="crust-dropdown">
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="tossed">
+                <input class="form-check-input me-2" type="radio" name="crust" id="tossed">
                 <label for="tossed">Hand-Tossed</label>
               </li>
               <li class="dropdown-item"> 
-                <input class="form-check-input me-2" type="checkbox" id="thin">
+                <input class="form-check-input me-2" type="radio" name="crust" id="thin">
                 <label for="thin">Thin</label>       
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="deepDish">
+                <input class="form-check-input me-2" type="radio" name="crust" id="deepDish">
                 <label for="deepDish">Deep-Dish</label>
               </li>
             </ul>
-          </li>                
+          </li>
+            <!--SauceSelection-->
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary" type="button" id="sauce-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <h3>Sauce</h3><span class="float-end">▼</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="sauce-dropdown">
               <li class="dropdown-item">  
-                <input class="form-check-input me-2" type="checkbox" id="tradRed">
+                <input class="form-check-input me-2" type="radio" name="sauce" id="tradRed">
                 <label for="tradRed">Traditional Red</label>
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="whiteSauce">
+                <input class="form-check-input me-2" type="radio" name="sauce" id="whiteSauce">
                 <label for="whiteSauce">White-Sauce</label>
               </li>         
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="pesto">
+                <input class="form-check-input me-2" type="radio" name="sauce" id="pesto">
                 <label for="pesto">Pesto</label>
               </li>
               <li class="dropdown-item">
-                <input class="form-check-input me-2" type="checkbox" id="none">
+                <input class="form-check-input me-2" type="radio" name="sauce" id="none">
                 <label for="none">none</label>
               </li>    
             </ul>
           </li>
+           <!--Cheezes-->
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary" type="button" id="cheese-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <h3>Cheese</h3><span class="float-end">▼</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="cheese-dropdown">
               <li class="dropdown-item">  
                 <input class="form-check-input me-2" type="checkbox" id="Mozz">
                 <label for="Mozz">Mozzerella</label>
@@ -170,10 +174,11 @@
               </li>     
             </ul>
           </li>
+            <!--Topping Start-->
           <li class="list-group-item">
-            <button class="btn btn-secondary w-100 text-start" type="button" id="byopDropDown" data-bs-toggle="collapse" data-bs-target="#toppingsCollapse">
-            <h3>Toppings</h3><span class="float-end">▼</span>
-              </button>  
+            <button class="btn btn-secondary w-100 text-start" type="button" id="toppings-dropdown" data-bs-toggle="collapse" data-bs-target="#toppingsCollapse">
+              <h3>Toppings</h3><span class="float-end">▼</span>
+            </button>
               <div class="collapse mt-2" id="toppingsCollapse">
                  <div class="p-2 border rounded bg-light">
                    <!-- Meat Group -->
@@ -207,31 +212,49 @@
           </li>
         </ul>
         <!--Stop BYOP---->           
-        <template id="order-template">
-         <div class="col-md-6 mb-4">
-           <div class="card">
-             <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="col-md-6 mb-4" id="order-form">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
                <h5 class="mb-0">Order #<span class="order-id"></span></h5>
                <span class="badge bg-primary order-status">Confirmed</span>
-             </div>
-             <div class="card-body">
+            </div>
+            <div class="card-body">
                <div class="order-items">
                  <!-- Items will be added here -->
                </div>
                <img src="" class="order-gif img-fluid mt-3 mb-3" style="max-height: 150px;">
                <button class="btn btn-primary w-100 next-stage-btn">Next stage</button>
-             </div>
-           </div>
-         </div>
-        </template> 
+            </div>         
+            <div class="card mb-3">
+              <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Customer Information</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="custieName" class="form-label">Name:</label>
+                  <input type="text" id="custieName" class="form-control" placeholder="Enter your name...">
+                </div>
+                <div class="mb-3">
+                  <label for="custieAddy" class="form-label">Address:</label>
+                  <input type="text" id="custieAddy" class="form-control" placeholder="Enter your address....">
+                </div>
+                <div class="mb-3">
+                  <label for="custiePhone" class="form-label">Phone Number:</label>
+                  <input type="tel" id="custiePhone" class="form-control" placeholder="Enter your phone number...">
+                </div>
+                <div class="mb-3">
+                  <label for="custieEmail" class="form-label">Email Address:</label>
+                  <input type="email" id="custieEmail" class="form-control" placeholder="Enter your email...">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>  
-    </div>
-
-    <div id="order-form">
-      
-    </div>
-   </div>        
-  </div>
+    </div> 
+   </div>
+  </div>        
+</div>
 
 
  <footer>

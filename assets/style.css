@@ -12,22 +12,22 @@
   margin-bottom: 0;
 }
 
-#byop{
+.byop{
   max-height: 350px;
   overflow-y: auto;
 }
 
-#pie-List{
+.pie-List{
   max-height: 2.5rem; 
 }
 
-#toppingsCollapse{
+.toppingsCollapse{
   max-height: 200px;
   text-align: left;
 }
 
 
-#byopDropDown{
+.byopDropDown{
   width: 100%;
   text-align: left;
 }
