@@ -11,43 +11,50 @@
    <title>The Brickoven</title>
 </head> 
 <body>  
-  <div class="container-fluid mt-5">
+  <div class="container">
+   <div class="mt-5 d-flex-row">
     <h1 class="display-2 text-center mt-5">
-      <img width="60px" src="./assets/images/Topmenulogo.png" />
+      <img width="100px" height="100px" src="./assets/images/Topmenulogo.png" />
         A National Favorite the<span class="badge text-bg-primary">Brickoven Cafe</span>  
     </h1>
-    <div class="row">   
-      <div class="card ml-5" style="width: 20rem">
+    <div class="d-flex justify-content-center">
+           <!--Start PreMade-Menu-->
+      <div class="card mx-auto gap-3" id="favPies" style="width: 25rem">
         <h2 class="card-header display-flex">Our Favorite Pizza Pie's</h2>
-        <ul class=" card-body list-group list-group-flush">
-           <li class="list-group-item card-body fs-4 fw-italic">
-             Traditional Pepperoni
+        <ul class="card-body list-group list-group-flush ">
+           <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+              <input class="form-check-input me-2" type="checkbox" id="pizza-traditional"/>
+              <label for="pizza-traditional">Traditional Pepperoni</label>             
             <div>
-                <p class="fw-bold text-end">$13</p>
+                <p class="fw-bold text-end" id="piePrice">$13</p>
             </div>
            </li>
-          <li class="list-group-item card-body fs-4 fw-italic">
-             All cheese
-            <div>
-               <p class="fw-bold text-end">$10</p>
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+              <input class="form-check-input me-2" type="checkbox" id="cheese-only"/>
+              <label for="cheese-only">All cheese</label>
+            <div class="d-flex flex-column align-items-start">
+               <p class="mb-0 fw-bold" id="piePrice">$10</p>
             </div>             
           </li>
-          <li class="list-group-item card-body fs-4 fw-italic">
-               <p>3-Meat & Cheese</p>
-            <div>
-              <p class="fw-bold text-end">$15</p>
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+              <input class="form-check-input me-2" type="checkbox" id="meatNcheese"/>
+              <label for="meatNcheese">3-Meat & Cheese</label>
+            <div class="d-flex flex-column align-items-start">
+              <p class="fw-bold mb-0" id="piePrice">$15</p>
             </div>
           </li>
-          <li class="list-group-item card-body fs-4 fw-italic">
-            Pesto Drizzled Supreme
+          <li class="list-group-item card-body fs-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+            <input class="form-check-input me-2" type="checkbox" id="supreme">
+            <label for="supreme">Pesto Drizzle Supreme</label>
               <div>
-                  <p class="fw-bold text-end">$16</p>
+                  <p class="fw-bold ext-end" id="piePrice">$16</p>
               </div>
           </li>
-          <li class="list-group-item card-body fs-4 mr-4 fw-italic">
-            Vegitable Vengence<img width="25px" height="25px" src="./assets/images/vegan.svg">
+          <li class="list-group-item card-body fs-4 mr-4 fw-italic d-flex justify-content-between align-items-center" id="pie-List">
+            <input class="form-check-input me-2" type="checkbox" id="vegveng">
+            <label for="vegveng">Vegitable Vengence</label><img width="25px" height="25px" src="./assets/images/vegan.svg">
                <div>
-                 <p class="fw-bold text-end">$14</p>
+                 <p class="fw-bold text-end mb-0" id="piePrice">$14</p>
               </div>
           </li>
         </ul>
@@ -55,94 +62,181 @@
           <small>All pizza's are created with 100% real cheese, fresh cut veggies, and premium meats</small>
         </div>
       </div>
-         
+           <!---Stop PreMade-->
+           <!--Start BYOP-->
       <div class="row">
-      <div class="card mt-6" style="width: 18rem;">
+      <div class="card mx-3" id="byop"   style="width: 25rem;">
         <div class="card-header">
-          Build Your Own Pie 
+          <h2>Build Your Own Pie</h2>
         </div>
         <ul class="list-group list-group-flush">
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Pie Size
+            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+              <h3>Pie Size</h3><span class="float-end">▼</span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li class="dropdown-item" >10"</li>
-              <li class="dropdown-item"> 12"</li>
-              <li class="dropdown-item"> 14"</li>
-              <li class="dropdown-item"> 16"</li>
-              <li class="dropdown-item"> 18"</li>    
+            <ul class="dropdown-menu" aria-labelledby="byopDropDown">
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="smCrust">
+                <label for="smCrust">10"</label>   
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox"  id="mdCrust">
+                <label for="mdCrust">12"</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="regCrust">
+                <label for="regCrust">14"</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="lgCrust">
+                <label for="lgCrust">16"</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="xlCrust">
+                <label for="xlCrust">18"</label>
+              </li>    
             </ul>
           </li>
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Sauce
+            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+              <h3>Crust</h3><span class="float-end">▼</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="tossed">
+                <label for="tossed">Hand-Tossed</label>
+              </li>
+              <li class="dropdown-item"> 
+                <input class="form-check-input me-2" type="checkbox" id="thin">
+                <label for="thin">Thin</label>       
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="deepDish">
+                <label for="deepDish">Deep-Dish</label>
+              </li>
+            </ul>
+          </li>                
+          <li class="dropdown list-group-item">
+            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+              <h3>Sauce</h3><span class="float-end">▼</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li class="dropdown-item"> Traditional Red</li>
-              <li class="dropdown-item"> White Sauce</li>
-              <li class="dropdown-item"> Pesto</li>
-              <li class="dropdown-item"> None</li>    
+              <li class="dropdown-item">  
+                <input class="form-check-input me-2" type="checkbox" id="tradRed">
+                <label for="tradRed">Traditional Red</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="whiteSauce">
+                <label for="whiteSauce">White-Sauce</label>
+              </li>         
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="pesto">
+                <label for="pesto">Pesto</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="none">
+                <label for="none">none</label>
+              </li>    
             </ul>
           </li>
           <li class="dropdown list-group-item">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Cheese
+            <button class="btn btn-secondary" type="button" id="byopDropDown" data-bs-toggle="dropdown" aria-expanded="false">
+              <h3>Cheese</h3><span class="float-end">▼</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li class="dropdown-item"> Mozzerella</li>
-              <li class="dropdown-item"> Feta</li>
-              <li class="dropdown-item"> Provolone</li>
-              <li class="dropdown-item"> Cheddar</li>
-              <li class="dropdown-item"> 3-Cheese Blend</li>
-              <li class="dropdown-item"> None</li>     
+              <li class="dropdown-item">  
+                <input class="form-check-input me-2" type="checkbox" id="Mozz">
+                <label for="Mozz">Mozzerella</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="feta">
+                <label for="feta">Feta</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="provolone">
+                <label for="provolone">Provolone</label>
+              </li>
+              <li class="dropdown-item"> 
+                <input class="form-check-input me-2" type="checkbox" id="cheddar">
+                <label for="cheddar">Cheddar</label>
+              </li>
+              <li class="dropdown-item">
+                <input class="form-check-input me-2" type="checkbox" id="threeCheese">
+                <label for="threeCheese">3-Cheese Blend</label>
+              </li>
+              <li class="dropdown-item">                     
+                <input class="form-check-input me-2" type="checkbox" id="noCheez">
+                <label for="noCheez">None</label>
+              </li>     
             </ul>
           </li>
           <li class="list-group-item">
-              <!-- This button toggles the collapse section below -->
-              <button class="btn btn-secondary w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#toppingsCollapse">
-                Toppings <span class="float-end">▼</span>
+            <button class="btn btn-secondary w-100 text-start" type="button" id="byopDropDown" data-bs-toggle="collapse" data-bs-target="#toppingsCollapse">
+            <h3>Toppings</h3><span class="float-end">▼</span>
               </button>  
               <div class="collapse mt-2" id="toppingsCollapse">
-                  <div class="p-2 border rounded bg-light">
-                    <!-- Meat Group -->
-                      <div class="mb-3">
-                        <label class="fw-bold d-block mb-1">Meats</label>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="pep"> <label for="pep">Pepperoni</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="sau"> <label for="sau">Sausage</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="bac"> <label for="bac">Bacon</label>
-                          </div>
-                      </div>
+                 <div class="p-2 border rounded bg-light">
+                   <!-- Meat Group -->
+                  <div class="mb-3">
+                     <label class="fw-bold d-block mb-1">Meats</label>
+                       <div class="form-check">
+                         <input class="form-check-input" type="checkbox" id="pep"> <label for="pep">Pepperoni</label>
+                       </div>
+                       <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="sau"> <label for="sau">Sausage</label>
+                       </div>
+                       <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="bac"> <label for="bac">Bacon</label>
+                       </div>
+                    </div>
                     <!-- Veggie Group -->
-                      <div>
-                        <label class="fw-bold d-block mb-1">Vegetables</label>
-                      <div class="form-check">
+                    <div>
+                     <label class="fw-bold d-block mb-1">Vegetables</label>
+                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="tom"> <label for="tom">Tomato</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gp"> <label for="gp">Green Pepper</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="bp"> <label for="bp">Banana Pepper</label>
-                      </div>
+                     </div>
+                     <div class="form-check">
+                       <input class="form-check-input" type="checkbox" id="gp"> <label for="gp">Green Pepper</label>
+                     </div>
+                     <div class="form-check">
+                       <input class="form-check-input" type="checkbox" id="bp"> <label for="bp">Banana Pepper</label>
+                    </div>
                   </div>
               </div>
             </div>
           </li>
         </ul>
+        <!--Stop BYOP---->           
+        <template id="order-template">
+         <div class="col-md-6 mb-4">
+           <div class="card">
+             <div class="card-header d-flex justify-content-between align-items-center">
+               <h5 class="mb-0">Order #<span class="order-id"></span></h5>
+               <span class="badge bg-primary order-status">Confirmed</span>
+             </div>
+             <div class="card-body">
+               <div class="order-items">
+                 <!-- Items will be added here -->
+               </div>
+               <img src="" class="order-gif img-fluid mt-3 mb-3" style="max-height: 150px;">
+               <button class="btn btn-primary w-100 next-stage-btn">Next stage</button>
+             </div>
+           </div>
+         </div>
+        </template> 
       </div>  
-    </div>                       
+    </div>
+
+    <div id="order-form">
+      
+    </div>
+   </div>        
   </div>
 
 
-     <footer>
-       <small>©<script>document.write(new Date().getFullYear())</script>Your company name. All Rights Reserved.</small> 
-     </footer><script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>  
+ <footer>
+   <small>©<script>document.write(new Date().getFullYear())</script>Your company name. All Rights Reserved.</small> 
+ </footer><script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>  
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
      <script src="./assets/index.js"></script>
    </body>

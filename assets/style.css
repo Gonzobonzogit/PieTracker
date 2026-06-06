@@ -1,0 +1,33 @@
+
+.list-group-item{
+  padding: 0.5rem 1rem;
+}
+
+.list-group-item p {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.list-group-item .form-check{
+  margin-bottom: 0;
+}
+
+#byop{
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+#pie-List{
+  max-height: 2.5rem; 
+}
+
+#toppingsCollapse{
+  max-height: 200px;
+  text-align: left;
+}
+
+
+#byopDropDown{
+  width: 100%;
+  text-align: left;
+}
