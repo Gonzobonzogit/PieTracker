@@ -523,7 +523,7 @@ const addWineToCart = (id) => {
 
 // --- Orders ---
 const placeOrder = () => {
-  if (tate.cart.length === 0) return;
+  if (state.cart.length === 0) return;
 
   const order = {
     id: state.nextOrderId++,
