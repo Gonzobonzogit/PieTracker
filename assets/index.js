@@ -61,13 +61,16 @@ const STATUS_STAGES = [
   { text: 'Delivered', gif: 'order-delivered.gif', variant: 'bg-success' }
 ];
 
+const STAGE_DELAYS = [2000, 10000, 5000, 3000, 8000, 4000];
+
 // --- State ---
 let state = {
   cart: [],
   orders: [],
   history: [],
   nextOrderId: 1000,
-  ageVerified: false
+  ageVerified: false,
+  autoTimers: {}
 };
 
 // --- Persistence ---
@@ -153,6 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) advanceOrder(Number(btn.dataset.id));
     const btn2 = e.target.closest('[data-action="archive"]');
     if (btn2) completeOrder(Number(btn2.dataset.id));
+    const cancelBtn = e.target.closest('[data-action="cancel"]');
+    if (cancelBtn) cancelOrder(Number(cancelBtn.dataset.id));
+    const autoBtn = e.target.closest('[data-action="auto-advance"]');
+    if (autoBtn) autoAdvanceOrder(Number(autoBtn.dataset.id));
   });
 
   // Form Listeners
@@ -570,16 +577,21 @@ const renderOrders = () => {
               </li>
             </ul>
           </div>
-          <div class="card-footer">
-            ${isDelivered
-              ? `<button class="btn btn-outline-secondary w-100" data-action="archive" data-id="${order.id}">Archive Order</button>`
-              : `<button class="btn btn-primary w-100" data-action="advance" data-id="${order.id}">Next Stage</button>`
-            }
-          </div>
-        </div>
-      </div>
-    `;
+           <div class="card-footer">
+                ${isDelivered
+                  ? `<button class="btn btn-outline-secondary w-100" data-action="archive" data-id="${order.id}">Archive Order</button>`
+                  : `<div class="d-flex gap-2">
+                      ${order.statusIdx === 0
+                        ? `<button class="btn btn-primary flex-grow-1" data-action="auto-advance" data-id="${order.id}">▶ Demo Mode</button>`
+                        : `<button class="btn btn-primary flex-grow-1" data-action="advance" data-id="${order.id}">Next Stage</button>`
+                      }
+                      <button class="btn btn-outline-danger" data-action="cancel" data-id="${order.id}">Cancel</button>
+                    </div>`
+                }
+              </div>
+            `;
   }).join('');
+
 }
 
 const advanceOrder = (id) => {
@@ -589,6 +601,25 @@ const advanceOrder = (id) => {
     order.statusIdx++;
     saveState();
     renderOrders();
+  }
+}
+
+const cancelOrder = (id) => {
+  if(state.autoTimers[id]) clearTimeout(state.autoTimers[id]);
+  delete state.autoTimers[id];
+  state.orders = state.orders.filter(o => o.id !== id);
+  saveState();
+  renderOrders();
+}
+
+const autoAdvanceOrder = (id) => {
+  let cumulative = 0;
+  for (const delay of STAGE_DELAYS) {
+    cumulative += delay;
+    state.autoTimers[id] = setTimeout(() => {
+      advanceOrder(id);
+      delete state.autoTimers[id];
+    }, cumulative);
   }
 }
 
