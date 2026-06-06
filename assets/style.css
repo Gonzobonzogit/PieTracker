@@ -1,33 +1,295 @@
+/* ===================================================================
+   Gruvbox Dark Theme — The Brickoven PieTracker
+   Palette: https://github.com/morhetz/gruvbox
+   =================================================================== */
 
-.list-group-item{
-  padding: 0.5rem 1rem;
+:root {
+  /* Gruvbox dark palette */
+  --gb-bg0:     #282828;
+  --gb-bg0-h:   #1d2021;
+  --gb-bg1:     #3c3836;
+  --gb-bg2:     #504945;
+  --gb-bg3:     #665c54;
+  --gb-bg4:     #7c6f64;
+
+  --gb-fg:      #ebdbb2;
+  --gb-fg0:     #fbf1c7;
+  --gb-fg1:     #ebdbb2;
+  --gb-fg2:     #d5c4a1;
+  --gb-fg3:     #bdae93;
+  --gb-fg4:     #a89984;
+
+  --gb-red:     #fb4934;
+  --gb-green:   #b8bb26;
+  --gb-yellow:  #fabd2f;
+  --gb-blue:    #83a598;
+  --gb-purple:  #d3869b;
+  --gb-aqua:    #8ec07c;
+  --gb-orange:  #fe8019;
 }
 
-.list-group-item p {
-  margin-left: auto;
-  white-space: nowrap;
+/* --- Base --- */
+html, body {
+  background-color: var(--gb-bg0);
+  color: var(--gb-fg);
 }
 
-.list-group-item .form-check{
-  margin-bottom: 0;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.byop{
-  max-height: 350px;
-  overflow-y: auto;
+a { color: var(--gb-blue); }
+a:hover { color: var(--gb-aqua); }
+
+/* Soft-muted utility replacement (Bootstrap's .text-muted is too washed on dark) */
+.text-muted-soft { color: var(--gb-fg4) !important; }
+
+/* --- Borders --- */
+.gruvbox-border { border-color: var(--gb-bg2) !important; }
+
+/* --- Cards --- */
+.gruvbox-card {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.gruvbox-card .card-body { background-color: var(--gb-bg1); }
+.gruvbox-card .card-footer {
+  background-color: var(--gb-bg0-h);
+  border-top: 1px solid var(--gb-bg2);
+  color: var(--gb-fg4);
+}
+.gruvbox-card .list-group-item {
+  background-color: var(--gb-bg1);
+  color: var(--gb-fg);
+  border-color: var(--gb-bg2);
 }
 
-.pie-List{
-  max-height: 2.5rem; 
+/* --- Card headers (per accent) --- */
+.gruvbox-header-danger {
+  background-color: var(--gb-red);
+  color: var(--gb-bg0-h);
+  border-bottom: 1px solid var(--gb-bg2);
+}
+.gruvbox-header-warning {
+  background-color: var(--gb-yellow);
+  color: var(--gb-bg0-h);
+  border-bottom: 1px solid var(--gb-bg2);
+}
+.gruvbox-header-success {
+  background-color: var(--gb-green);
+  color: var(--gb-bg0-h);
+  border-bottom: 1px solid var(--gb-bg2);
+}
+.gruvbox-header-purple {
+  background-color: var(--gb-purple);
+  color: var(--gb-bg0-h);
+  border-bottom: 1px solid var(--gb-bg2);
+}
+.gruvbox-header-dark {
+  background-color: var(--gb-bg0-h);
+  color: var(--gb-fg);
+  border-bottom: 1px solid var(--gb-bg2);
 }
 
-.toppingsCollapse{
-  max-height: 200px;
-  text-align: left;
+/* --- Text accent helpers --- */
+.gruvbox-green  { color: var(--gb-green) !important; }
+.gruvbox-yellow { color: var(--gb-yellow) !important; }
+.gruvbox-red    { color: var(--gb-red) !important; }
+.gruvbox-blue   { color: var(--gb-blue) !important; }
+.gruvbox-purple { color: var(--gb-purple) !important; }
+.gruvbox-aqua   { color: var(--gb-aqua) !important; }
+.gruvbox-orange { color: var(--gb-orange) !important; }
+
+/* --- Badges --- */
+.gruvbox-badge-warning {
+  background-color: var(--gb-yellow);
+  color: var(--gb-bg0-h);
+}
+.gruvbox-badge-light {
+  background-color: var(--gb-fg3);
+  color: var(--gb-bg0-h);
 }
 
+/* --- Buttons --- */
+.gruvbox-btn-success {
+  background-color: var(--gb-green);
+  color: var(--gb-bg0-h);
+  border: 1px solid var(--gb-green);
+  font-weight: 600;
+}
+.gruvbox-btn-success:hover {
+  background-color: #a3a523;
+  color: var(--gb-bg0-h);
+  border-color: #a3a523;
+}
 
-.byopDropDown{
+.gruvbox-btn-danger {
+  background-color: transparent;
+  color: var(--gb-red);
+  border: 1px solid var(--gb-red);
+}
+.gruvbox-btn-danger:hover {
+  background-color: var(--gb-red);
+  color: var(--gb-bg0-h);
+}
+
+.gruvbox-btn-primary {
+  background-color: var(--gb-blue);
+  color: var(--gb-bg0-h);
+  border: 1px solid var(--gb-blue);
+  font-weight: 600;
+}
+.gruvbox-btn-primary:hover {
+  background-color: #6f8e8a;
+  color: var(--gb-bg0-h);
+  border-color: #6f8e8a;
+}
+
+/* --- Form inputs / selects on dark theme --- */
+.gruvbox-input.form-select,
+.form-control,
+.form-select {
+  background-color: var(--gb-bg0-h);
+  color: var(--gb-fg);
+  border: 1px solid var(--gb-bg2);
+}
+.gruvbox-input.form-select:focus,
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--gb-bg0-h);
+  color: var(--gb-fg);
+  border-color: var(--gb-yellow);
+  box-shadow: 0 0 0 0.2rem rgba(250, 189, 47, 0.25);
+}
+
+.form-check-input {
+  background-color: var(--gb-bg0-h);
+  border-color: var(--gb-bg3);
+}
+.form-check-input:checked {
+  background-color: var(--gb-green);
+  border-color: var(--gb-green);
+}
+.form-check-input:focus {
+  border-color: var(--gb-yellow);
+  box-shadow: 0 0 0 0.2rem rgba(250, 189, 47, 0.25);
+}
+.form-check-label { color: var(--gb-fg); }
+
+/* --- Alerts / legend --- */
+.gruvbox-alert {
+  background-color: rgba(184, 187, 38, 0.08);
+  border: 1px solid var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.byop-legend {
+  padding: 0.75rem 1rem;
+}
+
+/* --- Order card image border --- */
+.order-card .card-body img {
+  border: 1px solid var(--gb-bg2);
+  background: var(--gb-bg0-h);
+}
+.order-card {
+  background-color: var(--gb-bg1);
+  border: 1px solid var(--gb-bg2);
+  color: var(--gb-fg);
+}
+.order-card .card-header,
+.order-card .card-footer {
+  background-color: var(--gb-bg0-h);
+  color: var(--gb-fg);
+  border-color: var(--gb-bg2);
+}
+.order-card .list-group-item {
+  background-color: var(--gb-bg1);
+  color: var(--gb-fg);
+  border-color: var(--gb-bg2);
+}
+
+/* --- Topping group header --- */
+.topping-group-header {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gb-yellow);
+  border-bottom: 1px solid var(--gb-bg2);
+  padding-bottom: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+.topping-badge-free { font-size: 0.7rem; vertical-align: middle; }
+
+/* --- Topping/cheese badge overrides (built dynamically in JS as bg-success/bg-warning/bg-info) --- */
+.bg-success { background-color: var(--gb-green) !important; color: var(--gb-bg0-h) !important; }
+.bg-warning { background-color: var(--gb-yellow) !important; color: var(--gb-bg0-h) !important; }
+.bg-info    { background-color: var(--gb-aqua)  !important; color: var(--gb-bg0-h) !important; }
+.bg-primary { background-color: var(--gb-blue)  !important; color: var(--gb-bg0-h) !important; }
+.bg-danger  { background-color: var(--gb-red)   !important; color: var(--gb-bg0-h) !important; }
+.bg-secondary { background-color: var(--gb-bg3) !important; color: var(--gb-fg) !important; }
+
+/* Outline button harmonization */
+.btn-outline-danger {
+  color: var(--gb-red);
+  border-color: var(--gb-red);
+}
+.btn-outline-danger:hover {
+  background-color: var(--gb-red);
+  color: var(--gb-bg0-h);
+}
+.btn-outline-warning {
+  color: var(--gb-yellow);
+  border-color: var(--gb-yellow);
+}
+.btn-outline-warning:hover {
+  background-color: var(--gb-yellow);
+  color: var(--gb-bg0-h);
+}
+.btn-outline-dark {
+  color: var(--gb-purple);
+  border-color: var(--gb-purple);
+}
+.btn-outline-dark:hover {
+  background-color: var(--gb-purple);
+  color: var(--gb-bg0-h);
+}
+.btn-outline-secondary {
+  color: var(--gb-fg3);
+  border-color: var(--gb-bg3);
+}
+.btn-outline-secondary:hover {
+  background-color: var(--gb-bg3);
+  color: var(--gb-fg);
+  border-color: var(--gb-bg3);
+}
+
+/* --- Cart items --- */
+#cart-list .list-group-item { padding-left: 0; padding-right: 0; }
+#cart-list .list-group-item { color: var(--gb-fg); }
+
+/* --- History list --- */
+#history-list .list-group-item {
+  background-color: var(--gb-bg1);
+  color: var(--gb-fg);
+  border-color: var(--gb-bg2);
+}
+
+/* --- Section headers --- */
+#active-orders h2,
+#order-history h2 {
+  color: var(--gb-fg0);
+}
+
+/* --- Header logo --- */
+header img { object-fit: contain; }
+.app-logo {
+  max-width: 600px;
   width: 100%;
-  text-align: left;
+  height: auto;
 }
+
+/* --- Footer --- */
+footer { color: var(--gb-fg4); }
